@@ -1,3 +1,5 @@
 The project as distributed uses PHP. However, this is an editing convienience 
 and can easily be modified to use no server side code by copying and pasting 
 the contents of grid.php over the PHP code in index.php . 
+
+WARNING: grid.php is not a nice file. If your editor does anything more complicated than display the file (e.g. if it syntax highlights the file), it will lag a lot upon opening this file. The only reason the table is hardcoded, instead of being generated each run, is it takes a significant amount of time to generate the table.
