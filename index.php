@@ -19,7 +19,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with JSC.  If not, see <http://www.gnu.org/licenses/>.
  */
- *?>
+?>
 <!DOCTYPE html>
 <html>
 	<head>
