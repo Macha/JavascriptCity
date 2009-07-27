@@ -84,11 +84,11 @@ jsc.processes.develop.run = function() {
 jsc.processes.jobRatio = {};
 jsc.processes.jobRatio.init = function() {};
 jsc.processes.jobRatio.run = function() {
-	if(jsc.data.jobs > jsc.data.citizens) {
+	if(jsc.data.jobs > jsc.data.citizens && jsc.data.resDemand < 50) {
 		jsc.data.resDemand += 2;
 		jsc.data.comDemand -= 1;
 		jsc.data.indDemand -= 2;
-	} else if(jsc.data.citizens > jsc.data.jobs) {
+	} else if(jsc.data.citizens > jsc.data.jobs && jsc.data.comDemand < 50) {
 		jsc.data.resDemand -= 2;
 		jsc.data.comDemand += 1;
 		jsc.data.indDemand += 2;
