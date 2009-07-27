@@ -26,8 +26,14 @@ $(document).ready(function() {
 jsc.processes = {};
 jsc.processData = {};
 
+/**
+ * The process that adds money for each developed property.
+ */
 jsc.processes.tax = {};
 jsc.processes.tax.init = function() {};
+/**
+ * Loops through every developed property and increases the amount of cash.
+ */
 jsc.processes.tax.run = function() {
 	for(var x=0; x < jsc.core.grid_size; x++) {
 		for (var y=0; y<jsc.core.grid_size; y++) {
@@ -41,6 +47,9 @@ jsc.processes.tax.run = function() {
 	}
 };
 
+/**
+ * The process to develop properties.
+ */
 jsc.processes.develop = {};
 jsc.processes.develop.init = function() {
 	jsc.processData.develop = {};
@@ -48,6 +57,10 @@ jsc.processes.develop.init = function() {
 	jsc.data.comDemand = 8;
 	jsc.data.indDemand = 5;
 };
+/**
+ * Loops through each undeveloped zone, and develops it based on a random chance, and the current demand
+ * for that type of property.
+ */
 jsc.processes.develop.run = function() {
 	for(var x=0; x < jsc.core.grid_size; x++) {
 		for (var y=0; y<jsc.core.grid_size; y++) {
@@ -81,6 +94,9 @@ jsc.processes.develop.run = function() {
 		}
 	}
 };
+/**
+ * This process calculates the ratio of jobs to residents and recalculates demand accordingly.
+ */
 jsc.processes.jobRatio = {};
 jsc.processes.jobRatio.init = function() {};
 jsc.processes.jobRatio.run = function() {
@@ -94,6 +110,9 @@ jsc.processes.jobRatio.run = function() {
 		jsc.data.indDemand += 2;
 	}
 };
+/**
+ * This process is responsible for keeping track of powered/unpowered properties.
+ */
 jsc.processes.power = {};
 jsc.processes.power.init = function() {
 	jsc.processData.power = {};
@@ -133,6 +152,9 @@ jsc.processes.power.run = function() {
 		}
 	}
 };
+/**
+ * This function spreads power from a powered cell to all surrounding cells.
+ */
 jsc.processes.power.spread = function(source, x, y) {
 	if((jsc.data.cells[x][y].type != null) && ((source.totalPower - source.usedPower) > jsc.processData.power.usagePerTile)) {
 		jsc.processData.power.processed[x][y] = true;
