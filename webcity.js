@@ -207,7 +207,10 @@ jsc.core.changeCash = function(amount, show_at_cursor) {
  * @return {Number} 0 if undeveloped, 1 if zoned, 2 if developed zone or 3 if road or 4 if city building.
  */
 jsc.core.getDevelopmentLevel = function(x, y) {
-	var base_level = jsc.tools[jsc.data.cells[x][y].type].developmentLevel;
+	if(jsc.data.cells[x][y].type == null) {
+		return 0;
+	}
+	var base_level = jsc.toolData[jsc.data.cells[x][y].type].developmentLevel;
 	if(base_level == 1 && jsc.data.cells[x][y].developed) {
 		base_level = 2;
 	}

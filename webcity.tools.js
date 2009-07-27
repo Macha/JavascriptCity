@@ -58,6 +58,9 @@ jsc.tools.res.run = function() {
 			if(jsc.data.cash < jsc.toolData.res.cost) {
 				break;
 			}
+			if(jsc.core.getDevelopmentLevel(x, y) > jsc.toolData.res.developmentLevel) {
+				continue;
+			}
 			if(jsc.data.cells[x][y].type != null) {
 				jsc.tools[jsc.data.cells[x][y].type].remove(x, y);
 			}
@@ -107,6 +110,9 @@ jsc.tools.ind.run = function() {
 			if(jsc.data.cash < jsc.toolData.ind.cost) {
 				break;
 			}
+			if(jsc.core.getDevelopmentLevel(x, y) > jsc.toolData.ind.developmentLevel) {
+				continue;
+			}
 			if(jsc.data.cells[x][y].type != null) {
 				jsc.tools[jsc.data.cells[x][y].type].remove(x, y);
 			}
@@ -139,6 +145,9 @@ jsc.tools.com.run = function() {
 		for(var y = jsc.data.selection.startY; y <= jsc.data.selection.endY; y++) {
 			if(jsc.data.cash < jsc.toolData.com.cost) {
 				break;
+			}
+			if(jsc.core.getDevelopmentLevel(x, y) > jsc.toolData.com.developmentLevel) {
+				continue;
 			}
 			if(jsc.data.cells[x][y].type != null) {
 				jsc.tools[jsc.data.cells[x][y].type].remove(x, y);
@@ -182,6 +191,9 @@ jsc.tools.road.run = function() {
 		for(var y = jsc.data.selection.startY; y <= jsc.data.selection.endY; y++) {
 			if(jsc.data.cash < jsc.toolData.road.cost) {
 				break;
+			}
+			if(jsc.core.getDevelopmentLevel(x, y) > jsc.toolData.road.developmentLevel) {
+				continue;
 			}
 			if(jsc.data.cells[x][y].type != null) {
 				jsc.tools[jsc.data.cells[x][y].type].remove(x, y);
@@ -254,11 +266,13 @@ jsc.tools.coal.run = function() {
 	var locX = selection.startX;
 	var locY = selection.startY;
 
-	jsc.data.cells[locX][locY].type = "coal";
-	jsc.data.cash -= jsc.toolData.coal.cost;
-	jsc.ui.addClassToCell("coal", locX, locY);
-	
-	jsc.data.powerSources.push({totalPower: jsc.toolData.coal.powerAmount, usedPower: 0, x: locX, y: locY});
+	if(jsc.core.getDevelopmentLevel(locX, locY) < jsc.toolData.coal.developmentLevel) {
+		jsc.data.cells[locX][locY].type = "coal";
+		jsc.data.cash -= jsc.toolData.coal.cost;
+		jsc.ui.addClassToCell("coal", locX, locY);
+		
+		jsc.data.powerSources.push({totalPower: jsc.toolData.coal.powerAmount, usedPower: 0, x: locX, y: locY});
+	}
 };
 jsc.tools.coal.remove = function(x, y) {
 	jsc.data.cash -= jsc.toolData.coal.removeCost;
