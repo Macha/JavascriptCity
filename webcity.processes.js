@@ -141,6 +141,7 @@ jsc.processes.power.init = function() {
 };
 jsc.processes.power.run = function() {
 	for(var source in jsc.data.powerSources) {
+		jsc.core.changeCash(-20);
 		jsc.data.powerSources[source].usedPower = 0;
 		jsc.processes.power.spread(jsc.data.powerSources[source], jsc.data.powerSources[source].x, jsc.data.powerSources[source].y);
 	}
@@ -163,6 +164,8 @@ jsc.processes.power.spread = function(source, x, y) {
 			jsc.processData.power.grid[x][y] = true;
 		}
 		
+		
+		// Gets the edges of the cell, making sure not to go over the map edges.
 		var firstX = x > 0 ? x - 1 : x;
 		var lastX = x < 199 ? x + 1 : x;
 		var firstY = y > 0 ? y - 1 : y;
