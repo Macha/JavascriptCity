@@ -173,17 +173,43 @@ jsc.core.prepareSelection = function(selection) {
 	}
 	return end_selection;
 }
+/**
+ * Pauses the game
+ */
 jsc.core.pause = function() {
 	jsc.core.paused = !jsc.core.paused;
 };
+/**
+ * Save function. Currently unfinished
+ */
 jsc.core.save = function() {
 	json = $.toJSON(jsc.data.cells);
 	alert(json);
 };
+/**
+ * Changes the amount of cash in the treasury.
+ * @param {Number} amount The amount to change by. Positive to give money, negative to take money
+ * @param {Boolean} show_at_cursor Whether the amount charged should be shown floating by the cursor.
+ */
 jsc.core.changeCash = function(amount, show_at_cursor) {
 	show_at_cursor = show_at_cursor || false;
 	jsc.data.cash += amount;
 	if(show_at_cursor) {
 		jsc.ui.showCashChange(amount);
 	}
+};
+/**
+ * This function gets the current development level of the cell.
+ * 
+ * @param {Number} x The x co-ordinate of the cell.
+ * @param {Number} y The y co-ordinate of the cell
+ * 
+ * @return {Number} 0 if undeveloped, 1 if zoned, 2 if developed zone or 3 if city building.
+ */
+jsc.core.getDevelopmentLevel = function(x, y) {
+	var base_level = jsc.tools[jsc.data.cells[x][y].type].developmentLevel;
+	if(base_level == 1 && jsc.data.cells[x][y].developed) {
+		base_level = 2;
+	}
+	return base_level;
 };
