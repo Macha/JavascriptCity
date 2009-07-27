@@ -204,7 +204,7 @@ jsc.core.changeCash = function(amount, show_at_cursor) {
  * @param {Number} x The x co-ordinate of the cell.
  * @param {Number} y The y co-ordinate of the cell
  * 
- * @return {Number} 0 if undeveloped, 1 if zoned, 2 if developed zone or 3 if city building.
+ * @return {Number} 0 if undeveloped, 1 if zoned, 2 if developed zone or 3 if road or 4 if city building.
  */
 jsc.core.getDevelopmentLevel = function(x, y) {
 	var base_level = jsc.tools[jsc.data.cells[x][y].type].developmentLevel;
